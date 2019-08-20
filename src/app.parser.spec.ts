@@ -60,7 +60,9 @@ describe('AppParser', () => {
       const csvStream = fs.createReadStream(__dirname + '/../test/csv/invalid.csv');
       await expect(appParser.parse(csvStream, CsvEntity))
         .rejects
-        .toStrictEqual({ errors: [ Error('Line 2 is invalid; number of keys: 3; number of values 2') ] });
+        .toStrictEqual({ errors: [
+          RangeError('Row length does not match headers'),
+        ] });
     });
 
   });
@@ -72,8 +74,8 @@ describe('AppParser', () => {
       await expect(appParser.parse(csvStream, CsvEntity))
         .rejects
         .toStrictEqual({ errors: [
-          Error('Line 2 is invalid; number of keys: 3; number of values 2'),
-          Error('Line 4 is invalid; number of keys: 3; number of values 2'),
+          RangeError('Row length does not match headers'),
+          RangeError('Row length does not match headers'),
         ] });
     });
 
