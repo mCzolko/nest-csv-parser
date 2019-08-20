@@ -6,3 +6,4 @@ package-lock.json
 tslint.json
 tsconfig.json
 .prettierrc
+tsconfig.tsbuildinfo
