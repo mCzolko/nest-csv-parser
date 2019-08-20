@@ -12,7 +12,7 @@ export interface ParsedData<T> {
 }
 
 @Injectable()
-export class AppParser {
+export class CsvParser {
   async parse(stream, Entity, count: number = null, offset: number = null): Promise<ParsedData<InstanceType<typeof Entity>>> {
     return new Promise((resolve, reject) => {
       let i = 0;

@@ -1,50 +1,50 @@
 // tslint:disable-next-line:no-var-requires
 const fs = require('fs');
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppParser } from './app.parser';
-import { CsvEntity } from '../test/csv/csv.entity';
-import { CsvEntityRemaped } from '../test/csv/csv.entity.remaped';
+import { CsvParser } from './csv.parser';
+import { CsvEntity } from '../test/csv.entity';
+import { CsvEntityRemaped } from '../test/csv.entity.remaped';
 
-describe('AppParser', () => {
-  let appParser: AppParser;
+describe('CsvParser', () => {
+  let csvParser: CsvParser;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      providers: [AppParser],
+      providers: [CsvParser],
     }).compile();
 
-    appParser = app.get<AppParser>(AppParser);
+    csvParser = app.get<CsvParser>(CsvParser);
   });
 
   describe('parse simple', () => {
 
     it('should return list of 2', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/csv/simple.csv');
-      const entities = await appParser.parse(csvStream, CsvEntity);
+      const csvStream = fs.createReadStream(__dirname + '/../test/simple.csv');
+      const entities = await csvParser.parse(csvStream, CsvEntity);
 
       expect(entities.list.length).toBe(2);
       expect(entities.total).toBe(2);
     });
 
     it('keys should be 2 on both entities', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/csv/simple.csv');
-      const entities = await appParser.parse(csvStream, CsvEntity);
+      const csvStream = fs.createReadStream(__dirname + '/../test/simple.csv');
+      const entities = await csvParser.parse(csvStream, CsvEntity);
 
       expect(Object.keys(entities.list[0]).length).toBe(2);
       expect(Object.keys(entities.list[1]).length).toBe(2);
     });
 
     it('entities should be instance of CsvEntity', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/csv/simple.csv');
-      const entities = await appParser.parse(csvStream, CsvEntity);
+      const csvStream = fs.createReadStream(__dirname + '/../test/simple.csv');
+      const entities = await csvParser.parse(csvStream, CsvEntity);
 
       expect(entities.list[0]).toBeInstanceOf(CsvEntity);
       expect(entities.list[1]).toBeInstanceOf(CsvEntity);
     });
 
     it('should return list of correct entities', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/csv/simple.csv');
-      const entities = await appParser.parse(csvStream, CsvEntity);
+      const csvStream = fs.createReadStream(__dirname + '/../test/simple.csv');
+      const entities = await csvParser.parse(csvStream, CsvEntity);
       const csv1 = new CsvEntity({ foo: '1', bar: 'a' });
       const csv2 = new CsvEntity({ foo: '2', bar: 'b' });
 
@@ -57,8 +57,8 @@ describe('AppParser', () => {
   describe('parse invalid', () => {
 
     it('should reject an error', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/csv/invalid.csv');
-      await expect(appParser.parse(csvStream, CsvEntity))
+      const csvStream = fs.createReadStream(__dirname + '/../test/invalid.csv');
+      await expect(csvParser.parse(csvStream, CsvEntity))
         .rejects
         .toStrictEqual({ errors: [
           RangeError('Row length does not match headers'),
@@ -70,8 +70,8 @@ describe('AppParser', () => {
   describe('parse invalid multiple', () => {
 
     it('should reject 2 errors', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/csv/invalid.multiple.csv');
-      await expect(appParser.parse(csvStream, CsvEntity))
+      const csvStream = fs.createReadStream(__dirname + '/../test/invalid.multiple.csv');
+      await expect(csvParser.parse(csvStream, CsvEntity))
         .rejects
         .toStrictEqual({ errors: [
           RangeError('Row length does not match headers'),
@@ -84,8 +84,8 @@ describe('AppParser', () => {
   describe('parse quoted', () => {
 
     it('should cleanup quotes', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/csv/quoted.csv');
-      const entities = await appParser.parse(csvStream, CsvEntity);
+      const csvStream = fs.createReadStream(__dirname + '/../test/quoted.csv');
+      const entities = await csvParser.parse(csvStream, CsvEntity);
       const csv1 = new CsvEntity({ foo: '1', bar: 'a' });
       const csv2 = new CsvEntity({ foo: '2', bar: 'b' });
 
@@ -98,8 +98,8 @@ describe('AppParser', () => {
   describe('parse remaped', () => {
 
     it('should remap keys and cast type', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/csv/remaped.csv');
-      const entities = await appParser.parse(csvStream, CsvEntityRemaped);
+      const csvStream = fs.createReadStream(__dirname + '/../test/remaped.csv');
+      const entities = await csvParser.parse(csvStream, CsvEntityRemaped);
       const csv1 = new CsvEntityRemaped({ id: 1, value: 'a', nothing: 'x' });
       const csv2 = new CsvEntityRemaped({ id: 2, value: 'b', nothing: 'y' });
 
