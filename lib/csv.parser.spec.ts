@@ -2,8 +2,8 @@
 const fs = require('fs');
 import { Test, TestingModule } from '@nestjs/testing';
 import { CsvParser } from './csv.parser';
-import { CsvEntity } from '../test/csv.entity';
-import { CsvEntityRemaped } from '../test/csv.entity.remaped';
+import { CsvEntity } from '../tests/csv.entity';
+import { CsvEntityRemaped } from '../tests/csv.entity.remaped';
 
 describe('CsvParser', () => {
   let csvParser: CsvParser;
@@ -19,7 +19,7 @@ describe('CsvParser', () => {
   describe('parse simple', () => {
 
     it('should return list of 2', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/simple.csv');
+      const csvStream = fs.createReadStream(__dirname + '/../tests/simple.csv');
       const entities = await csvParser.parse(csvStream, CsvEntity);
 
       expect(entities.list.length).toBe(2);
@@ -27,7 +27,7 @@ describe('CsvParser', () => {
     });
 
     it('keys should be 2 on both entities', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/simple.csv');
+      const csvStream = fs.createReadStream(__dirname + '/../tests/simple.csv');
       const entities = await csvParser.parse(csvStream, CsvEntity);
 
       expect(Object.keys(entities.list[0]).length).toBe(2);
@@ -35,7 +35,7 @@ describe('CsvParser', () => {
     });
 
     it('entities should be instance of CsvEntity', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/simple.csv');
+      const csvStream = fs.createReadStream(__dirname + '/../tests/simple.csv');
       const entities = await csvParser.parse(csvStream, CsvEntity);
 
       expect(entities.list[0]).toBeInstanceOf(CsvEntity);
@@ -43,7 +43,7 @@ describe('CsvParser', () => {
     });
 
     it('should return list of correct entities', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/simple.csv');
+      const csvStream = fs.createReadStream(__dirname + '/../tests/simple.csv');
       const entities = await csvParser.parse(csvStream, CsvEntity);
       const csv1 = new CsvEntity({ foo: '1', bar: 'a' });
       const csv2 = new CsvEntity({ foo: '2', bar: 'b' });
@@ -57,7 +57,7 @@ describe('CsvParser', () => {
   describe('parse invalid', () => {
 
     it('should reject an error', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/invalid.csv');
+      const csvStream = fs.createReadStream(__dirname + '/../tests/invalid.csv');
       await expect(csvParser.parse(csvStream, CsvEntity))
         .rejects
         .toStrictEqual({ errors: [
@@ -70,7 +70,7 @@ describe('CsvParser', () => {
   describe('parse invalid multiple', () => {
 
     it('should reject 2 errors', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/invalid.multiple.csv');
+      const csvStream = fs.createReadStream(__dirname + '/../tests/invalid.multiple.csv');
       await expect(csvParser.parse(csvStream, CsvEntity))
         .rejects
         .toStrictEqual({ errors: [
@@ -84,7 +84,7 @@ describe('CsvParser', () => {
   describe('parse quoted', () => {
 
     it('should cleanup quotes', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/quoted.csv');
+      const csvStream = fs.createReadStream(__dirname + '/../tests/quoted.csv');
       const entities = await csvParser.parse(csvStream, CsvEntity);
       const csv1 = new CsvEntity({ foo: '1', bar: 'a' });
       const csv2 = new CsvEntity({ foo: '2', bar: 'b' });
@@ -98,7 +98,7 @@ describe('CsvParser', () => {
   describe('parse remaped', () => {
 
     it('should remap keys and cast type', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/remaped.csv');
+      const csvStream = fs.createReadStream(__dirname + '/../tests/remaped.csv');
       const entities = await csvParser.parse(csvStream, CsvEntityRemaped);
       const csv1 = new CsvEntityRemaped({ id: 1, value: 'a', nothing: 'x' });
       const csv2 = new CsvEntityRemaped({ id: 2, value: 'b', nothing: 'y' });
