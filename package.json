@@ -5,6 +5,7 @@
   "author": "Michael Czolko <michael@czolko.cz>",
   "license": "MIT",
   "scripts": {
+    "compile": "tsc -p tsconfig.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
