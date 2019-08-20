@@ -1,17 +1,21 @@
 {
   "name": "nest-csv-parser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CSV parser for NestJS framework",
   "author": "Michael Czolko <michael@czolko.cz>",
   "license": "MIT",
   "scripts": {
-    "compile": "tsc -p tsconfig.json",
+    "build": "rm -rf dist && tsc -p tsconfig.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch --verbose",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "prepublish:npm": "npm run build",
+    "publish:npm": "npm publish --access public",
+    "prepublish:next": "npm run build",
+    "publish:next": "npm publish --access public --tag next"
   },
   "dependencies": {
     "@nestjs/common": "6.5.3",
