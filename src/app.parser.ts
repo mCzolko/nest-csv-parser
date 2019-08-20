@@ -46,8 +46,7 @@ export class AppParser {
           c++;
         }
 
-        const procesedLine = this.processLine(i, line, Entity);
-        list.push(procesedLine);
+        list.push(this.processLine(line, Entity));
       });
 
       pipedStream.on(
@@ -65,17 +64,15 @@ export class AppParser {
     });
   }
 
-  processLine(index: number, line: any, Entity): any {
-    /*
+  processLine(line: any, Entity): any {
+    const entityInstance = new Entity();
     const plain = {};
-    keys.forEach((key: string, i: number) => {
-      const plainKey = key;
-      console.log(key, getCsvKey(new Entity(), key));
-      // plain[plainKey] = lineSplitted[i];
-    });
-    */
+    const plainLine = classToPlain(line);
 
-    const plain = classToPlain(line);
+    Object.keys(plainLine).forEach((key: string) => {
+      const remapKey = getCsvKey(entityInstance, key);
+      plain[remapKey || key] = plainLine[key];
+    });
 
     return plainToClass(Entity, plain);
   }

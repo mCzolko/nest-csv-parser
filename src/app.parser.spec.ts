@@ -97,11 +97,11 @@ describe('AppParser', () => {
 
   describe('parse remaped', () => {
 
-    it('should remap keys', async () => {
-      const csvStream = fs.createReadStream(__dirname + '/../test/csv/simple.csv');
+    it('should remap keys and cast type', async () => {
+      const csvStream = fs.createReadStream(__dirname + '/../test/csv/remaped.csv');
       const entities = await appParser.parse(csvStream, CsvEntityRemaped);
-      const csv1 = new CsvEntityRemaped({ id: 1, value: 'a' });
-      const csv2 = new CsvEntityRemaped({ id: 2, value: 'b' });
+      const csv1 = new CsvEntityRemaped({ id: 1, value: 'a', nothing: 'x' });
+      const csv2 = new CsvEntityRemaped({ id: 2, value: 'b', nothing: 'y' });
 
       expect(entities.list[0]).toStrictEqual(csv1);
       expect(entities.list[1]).toStrictEqual(csv2);
