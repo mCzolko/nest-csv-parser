@@ -52,6 +52,22 @@ describe('CsvParser', () => {
       expect(entities.list[1]).toStrictEqual(csv2);
     });
 
+    it('should return list of first entity', async () => {
+      const csvStream = fs.createReadStream(__dirname + '/../tests/simple.csv');
+      const entities = await csvParser.parse(csvStream, CsvEntity, 1);
+      const csv1 = new CsvEntity({ foo: '1', bar: 'a' });
+
+      expect(entities.list[0]).toStrictEqual(csv1);
+    });
+
+    it('should return list of first entity', async () => {
+      const csvStream = fs.createReadStream(__dirname + '/../tests/simple.csv');
+      const entities = await csvParser.parse(csvStream, CsvEntity, 1, 1);
+      const csv2 = new CsvEntity({ foo: '2', bar: 'b' });
+
+      expect(entities.list[0]).toStrictEqual(csv2);
+    });
+
   });
 
   describe('parse invalid', () => {
