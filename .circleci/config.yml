@@ -55,7 +55,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package-lock.json" }}
-      - run: yarn run test:cov
+      - run: yarn run test:cov-ci
       - store_artifacts:
           path: coverage
           destination: coverage
