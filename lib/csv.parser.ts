@@ -23,7 +23,7 @@ export class CsvParser {
       const pipedStream = stream.pipe(csv({
         strict: true,
         separator: ';',
-        ...csvConfig
+        ...csvConfig,
       }));
 
       pipedStream.on('error', (e) => {
