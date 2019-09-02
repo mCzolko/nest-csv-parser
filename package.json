@@ -1,12 +1,12 @@
 {
   "name": "nest-csv-parser",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "description": "CSV parser for NestJS framework",
   "author": "Michael Czolko <michael@czolko.cz>",
   "license": "MIT",
   "scripts": {
     "compile": "tsc -p tsconfig.json",
-    "build": "rm tsconfig.tsbuildinfo && rm -rf dist && tsc -p tsconfig.json",
+    "build": "rm tsconfig.tsbuildinfo || rm -rf dist && tsc -p tsconfig.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",

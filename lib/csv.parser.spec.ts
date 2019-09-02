@@ -68,6 +68,14 @@ describe('CsvParser', () => {
       expect(entities.list[0]).toStrictEqual(csv2);
     });
 
+    it('should return list of 2 separated by commma', async () => {
+      const csvStream = fs.createReadStream(__dirname + '/../tests/simple.comma-separated.csv');
+      const entities = await csvParser.parse(csvStream, CsvEntity, null, null, { separator: ',' });
+
+      expect(entities.list.length).toBe(2);
+      expect(entities.total).toBe(2);
+    });
+
   });
 
   describe('parse invalid', () => {

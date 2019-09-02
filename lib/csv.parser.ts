@@ -13,7 +13,7 @@ export interface ParsedData<T> {
 
 @Injectable()
 export class CsvParser {
-  async parse(stream, Entity, count: number = null, offset: number = null): Promise<ParsedData<InstanceType<typeof Entity>>> {
+  async parse(stream, Entity, count: number = null, offset: number = null, csvConfig: object = {}): Promise<ParsedData<InstanceType<typeof Entity>>> {
     return new Promise((resolve, reject) => {
       let i = 0;
       let c = 0;
@@ -23,6 +23,7 @@ export class CsvParser {
       const pipedStream = stream.pipe(csv({
         strict: true,
         separator: ';',
+        ...csvConfig
       }));
 
       pipedStream.on('error', (e) => {
