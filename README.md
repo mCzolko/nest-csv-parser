@@ -110,7 +110,7 @@ Offset is similar to SQL databases. Skips the N lines from the beginning of the 
 
 default
 
-```json
+```js
 { strict: true, separator: ';' }
 ```
 
