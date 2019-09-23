@@ -138,4 +138,5 @@ $ yarn test
 ```
 
 ## Author
-Michael Czolko [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N3145WR)
+Michael Czolko
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N3145WR)
