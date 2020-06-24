@@ -20,15 +20,15 @@
     "publish:next": "npm publish --access public --tag next"
   },
   "dependencies": {
-    "@nestjs/common": "6.6.7",
-    "@nestjs/core": "6.6.7",
+    "@nestjs/common": "7.2.0",
+    "@nestjs/core": "7.2.0",
     "class-transformer": "0.2.3",
     "csv-parser": "2.3.0",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.3"
   },
   "devDependencies": {
-    "@nestjs/testing": "6.6.7",
+    "@nestjs/testing": "7.2.0",
     "@types/jest": "26.0.3",
     "@types/node": "11.13.20",
     "coveralls": "3.0.6",
