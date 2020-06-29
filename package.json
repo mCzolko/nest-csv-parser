@@ -39,7 +39,7 @@
     "tsc-watch": "3.0.1",
     "tsconfig-paths": "3.8.0",
     "tslint": "5.20.0",
-    "typescript": "3.5.3"
+    "typescript": "3.9.5"
   },
   "jest": {
     "moduleFileExtensions": [
