@@ -1,6 +1,6 @@
 {
   "name": "nest-csv-parser",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "CSV parser for NestJS framework",
   "author": "Michael Czolko <michael@czolko.cz>",
   "license": "MIT",
