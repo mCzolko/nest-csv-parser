@@ -25,7 +25,7 @@
     "class-transformer": "0.2.3",
     "csv-parser": "2.3.3",
     "reflect-metadata": "0.1.13",
-    "rxjs": "6.6.0"
+    "rxjs": "6.6.2"
   },
   "devDependencies": {
     "@nestjs/testing": "7.4.0",
