@@ -23,7 +23,7 @@
     "@nestjs/common": "7.4.4",
     "@nestjs/core": "7.4.4",
     "class-transformer": "0.3.1",
-    "csv-parser": "2.3.3",
+    "csv-parser": "2.3.5",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.6.2"
   },
