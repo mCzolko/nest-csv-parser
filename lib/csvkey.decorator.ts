@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-const formatMetadataKey = Symbol('CsvKey');
+export const formatMetadataKey = Symbol('CsvKey');
 
 export const CsvKey = (name: string) => (target, property) => {
   const metadata = Reflect.getMetadata(formatMetadataKey, target) || {};
